@@ -10,10 +10,15 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
-func repl() {
+type config struct {
+	Next     *string
+	Previous *string
+}
+
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -27,7 +32,7 @@ func repl() {
 		commandName := cleanedWords[0]
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback()
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -57,6 +62,16 @@ func getCommands() map[string]cliCommand {
 			name:        "help",
 			description: "Displays a help message",
 			callback:    commandHelp,
+		},
+		"map": {
+			name:        "map",
+			description: "Cycles through 20 locations at a time",
+			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Cycles backwards through 20 locations at a time",
+			callback:    commandMapB,
 		},
 	}
 }

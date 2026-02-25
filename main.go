@@ -1,5 +1,6 @@
 package main
 
 func main() {
-	repl()
+	current_cfg := &config{Next: nil, Previous: nil}
+	startRepl(current_cfg)
 }
