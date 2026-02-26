@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/DegsRed72/go_pokedex/internal/pokeapi"
 )
 
 type cliCommand struct {
@@ -14,8 +16,9 @@ type cliCommand struct {
 }
 
 type config struct {
-	Next     *string
-	Previous *string
+	pokeapiClient pokeapi.Client
+	Next          *string
+	Previous      *string
 }
 
 func startRepl(cfg *config) {
