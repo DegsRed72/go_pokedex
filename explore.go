@@ -6,7 +6,7 @@ import (
 )
 
 func commandExplore(cfg *config, args ...string) error {
-	if len(args) == 0 {
+	if len(args) != 1 {
 		return errors.New("Must include location name when entering 'explore' command")
 	}
 	fmt.Println("Exploring...")
