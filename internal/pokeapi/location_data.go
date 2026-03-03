@@ -61,7 +61,7 @@ type LocationData struct {
 }
 
 func (c *Client) ListData(name *string) (LocationData, error) {
-	url := baseURL + "/location-area/" + *name + "/"
+	url := baseURL + "/location-area/" + *name
 	dat, ok := c.cache.Get(url)
 	if !ok {
 		var err error
